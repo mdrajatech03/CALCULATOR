@@ -1,17 +1,55 @@
-# Calculator
+# 🧮 Calculator
 
-A simple calculator built using HTML, CSS, and JavaScript.
+A simple calculator built using **HTML, CSS, and JavaScript**.
 
-## Features
-- Addition
-- Subtraction
-- Multiplication
-- Division
+---
 
-## Live Demo
-https://mdrajatech03.github.io/CALCULATOR/
+## 🌐 Live Demo
 
-## Technologies Used
-- HTML
-- CSS
-- JavaScript
+[🚀 Click Here to Use Calculator](https://mdrajatech03.github.io/CALCULATOR/)
+
+---
+
+## 📸 Screenshot
+
+![Calculator Screenshot](screenshot.png)
+
+---
+
+## 🚀 Features
+
+- ➕ Addition
+- ➖ Subtraction
+- ✖️ Multiplication
+- ➗ Division
+- 📱 Responsive Design
+
+---
+
+## 🛠 Tech Stack
+
+![HTML](https://img.shields.io/badge/HTML-5-orange)
+![CSS](https://img.shields.io/badge/CSS-3-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+
+---
+
+## 📂 Project Structure
+
+```
+CALCULATOR
+│
+├── index.html
+├── style.css
+├── script.js
+├── icon.png
+└── README.md
+```
+
+---
+
+## 👨‍💻 Author
+
+**Rajatech**
+
+GitHub: https://github.com/mdrajatech03
