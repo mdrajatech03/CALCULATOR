@@ -13,9 +13,9 @@ A simple calculator built using **HTML, CSS, and JavaScript**.
 ## 📸 Screenshot
 
 ![Calculator Screenshot1](screenshot0.jph)
-![Calculator Screenshot2](Screenshot1.jpg)
-![Calculator Screenshot3](Screenshot2.jpg)
-![Calculator Screenshot4](Screenshot3.jpg)
+![Calculator Screenshot2](screenshot1.jpg)
+![Calculator Screenshot3](screenshot2.jpg)
+![Calculator Screenshot4](screenshot3.jpg)
 ---
 
 ## 🚀 Features
