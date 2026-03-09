@@ -12,8 +12,10 @@ A simple calculator built using **HTML, CSS, and JavaScript**.
 
 ## 📸 Screenshot
 
-![Calculator Screenshot](screenshot.png)
-
+![Calculator Screenshot](screenshot0.png)
+![Calculator Screenshot](Screenshot1.jpg)
+![Calculator Screenshot](Screenshot2.jpg)
+![Calculator Screenshot](Screenshot3.jpg)
 ---
 
 ## 🚀 Features
