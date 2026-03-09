@@ -1,2 +1,17 @@
-# CALCULATOR
-This is a simple calculator project that can perform basic arithmetic operations such as addition, subtraction, multiplication, and division. The project is designed to demonstrate fundamental programming concepts and provide an easy-to-use interface for calculations.
+# Calculator
+
+A simple calculator built using HTML, CSS, and JavaScript.
+
+## Features
+- Addition
+- Subtraction
+- Multiplication
+- Division
+
+## Live Demo
+https://mdrajatech03.github.io/CALCULATOR/
+
+## Technologies Used
+- HTML
+- CSS
+- JavaScript
