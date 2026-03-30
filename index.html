@@ -2,50 +2,204 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Calculator-App</title>
+    <title>Ultimate Pro Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+        :root {
+            --bg-color: #121212;
+            --calc-bg: #1e1e1e;
+            --text-color: #ffffff;
+            --shadow: -5px -5px 12px rgba(255, 255, 255, 0.05), 5px 5px 15px rgba(0, 0, 0, 0.5);
+            --input-bg: #252525;
+            --accent: #fb7c14;
+        }
+
+        .light-mode {
+            --bg-color: #f0f0f0;
+            --calc-bg: #e0e0e0;
+            --text-color: #333333;
+            --shadow: -5px -5px 12px #ffffff, 5px 5px 12px #bebebe;
+            --input-bg: #efefef;
+        }
+
+        * {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            width: 100%; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            background: var(--bg-color);
+            padding: 10px;
+        }
+
+        .calculator {
+            padding: 25px; border-radius: 25px;
+            background: var(--calc-bg);
+            box-shadow: var(--shadow);
+            width: 100%; max-width: 400px;
+            position: relative; overflow: hidden;
+        }
+
+        .top-controls {
+            display: flex; justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .btn-small {
+            background: var(--accent); color: white;
+            border: none; padding: 5px 12px;
+            border-radius: 15px; cursor: pointer; font-size: 12px;
+        }
+
+        input {
+            width: 100%; border: none; padding: 20px;
+            margin-bottom: 15px; background: var(--input-bg);
+            font-size: 32px; text-align: right;
+            color: var(--text-color); border-radius: 15px;
+            box-shadow: inset 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* History Panel */
+        #historyPanel {
+            position: absolute; top: 70px; left: 0;
+            width: 100%; height: 0;
+            background: var(--calc-bg);
+            z-index: 10; overflow-y: auto;
+            transition: 0.4s ease; border-radius: 0 0 20px 20px;
+        }
+
+        #historyPanel.active { height: 75%; padding: 20px; border-top: 1px solid #555; }
+
+        .history-item {
+            font-size: 14px; border-bottom: 1px solid #444;
+            padding: 8px 0; color: var(--text-color); text-align: right;
+        }
+
+        .buttons-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+        }
+
+        button {
+            border: none; aspect-ratio: 1/1; border-radius: 50%;
+            background: transparent; color: var(--text-color);
+            font-size: 18px; box-shadow: var(--shadow);
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+        }
+
+        button:active { transform: scale(0.9); }
+        .equalBtn { background: var(--accent); color: white; }
+        .operator { color: #6dee0a; }
+        .adv { color: #00d4ff; font-size: 14px; }
+
+        @media (max-width: 380px) {
+            .calculator { padding: 15px; }
+            button { font-size: 16px; }
+            input { font-size: 26px; }
+        }
+    </style>
 </head>
 <body>
+
     <div class="calculator">
-        <input type="text" placeholder="0" id="inputBox">
-        <div>
+        <div class="top-controls">
+            <button class="btn-small" onclick="toggleHistory()">📜 History</button>
+            <button class="btn-small" onclick="toggleTheme()">🌓 Mode</button>
+        </div>
+
+        <div id="historyPanel">
+            <div style="display:flex; justify-content: space-between;">
+                <strong>History</strong>
+                <span onclick="clearHistory()" style="cursor:pointer; color:red;">Clear</span>
+            </div>
+            <div id="historyList"></div>
+        </div>
+
+        <input type="text" placeholder="0" id="inputBox" readonly>
+        
+        <div class="buttons-grid">
+            <button class="adv" onclick="mathFunc('sqrt')">√</button>
+            <button class="adv" onclick="mathFunc('pow')">x²</button>
+            <button class="adv" onclick="mathFunc('sin')">sin</button>
+            <button class="adv" onclick="mathFunc('cos')">cos</button>
+
             <button class="operator">AC</button>
             <button class="operator">DEL</button>
             <button class="operator">%</button>
             <button class="operator">/</button>
-        </div>
 
-        <div>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
+            <button>7</button><button>8</button><button>9</button>
             <button class="operator">*</button>
-        </div>
 
-        <div>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
+            <button>4</button><button>5</button><button>6</button>
             <button class="operator">-</button>
-        </div>
 
-        <div>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button>1</button><button>2</button><button>3</button>
             <button class="operator">+</button>
-        </div>
 
-        <div>
-            <button>00</button>
-            <button>0</button>
-            <button>.</button>
+            <button>00</button><button>0</button><button>.</button>
             <button class="equalBtn">=</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        let input = document.getElementById('inputBox');
+        let historyList = document.getElementById('historyList');
+        let string = "";
+
+        // Common Buttons
+        document.querySelectorAll('button:not(.btn-small):not(.adv)').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                let val = e.target.innerText;
+                if (val == '=') solve();
+                else if (val == 'AC') { string = ""; input.value = "0"; }
+                else if (val == 'DEL') { string = string.slice(0,-1); input.value = string || "0"; }
+                else { string += val; input.value = string; }
+            });
+        });
+
+        function mathFunc(type) {
+            try {
+                let num = eval(string || input.value);
+                let res;
+                if(type=='sqrt') res = Math.sqrt(num);
+                if(type=='pow') res = Math.pow(num, 2);
+                if(type=='sin') res = Math.sin(num * Math.PI/180);
+                if(type=='cos') res = Math.cos(num * Math.PI/180);
+                
+                let result = Number(res).toFixed(2);
+                addHistory(`${type}(${num})`, result);
+                input.value = result;
+                string = result.toString();
+            } catch { input.value = "Error"; }
+        }
+
+        function solve() {
+            try {
+                if(string) {
+                    let result = eval(string);
+                    addHistory(string, result);
+                    input.value = result;
+                    string = result.toString();
+                }
+            } catch { input.value = "Error"; string = ""; }
+        }
+
+        function addHistory(expr, res) {
+            let div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerHTML = `${expr} = <strong>${res}</strong>`;
+            historyList.prepend(div);
+        }
+
+        function toggleHistory() { document.getElementById('historyPanel').classList.toggle('active'); }
+        function clearHistory() { historyList.innerHTML = ""; }
+        function toggleTheme() { document.body.classList.toggle('light-mode'); }
+    </script>
 </body>
 </html>
