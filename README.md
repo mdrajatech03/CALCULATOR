@@ -6,7 +6,7 @@ A simple calculator built using **HTML, CSS, and JavaScript**.
 
 ## 🌐 Live Demo
 
-[🚀 Click Here to Use Calculator](https://mdrajatech03.github.io/CALCULATOR/)
+**[🚀 Click Here to Use Calculator](https://mdrajatech03.github.io/CALCULATOR/)**
 
 ---
 
